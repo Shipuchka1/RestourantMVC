@@ -1,0 +1,79 @@
+﻿@using RestourantManagement.DAL.Model
+@model Menu
+
+@{
+    ViewBag.Title = "Index";
+    int State = (int)ViewBag.State;
+    string Message = ViewBag.Message;
+    List<SelectListItem> eats = (List<SelectListItem>)TempData["Eats"];
+   
+}
+
+@if(State==0)
+{
+    <div class="alert alert-success">
+        @Message
+    </div>
+}
+
+else if(State ==1)
+{
+    <div class="alert alert-danger">
+        @Message
+    </div>
+}
+
+<h1>Добавление меню</h1>
+@using (Html.BeginForm("SaveMenu","RestourantMenu"))
+{
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <br /><br />
+
+        <div class="form-group">
+            <label class="col-xs-4 control-label">
+                Наименование
+            </label>
+            <div class="col-xs-5">
+                @Html.TextBoxFor(m => Model.ItemName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label">
+                Тип еды
+            </label>
+            <div class="col-xs-5">
+                @Html.DropDownListFor(model =>
+          Model.ItemEatTypeId,
+          eats, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label">
+                Описание
+            </label>
+            <div class="col-xs-5">
+                @Html.TextBoxFor(m => Model.ItemDesc, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-xs-4 control-label">
+                Цена
+            </label>
+            <div class="col-xs-5">
+                @Html.TextBoxFor(m => Model.Cost, new { @class = "form-control", @type = "money" })
+            </div>
+        </div>
+        @Html.TextBoxFor(m => Model.ItemId, new { @class = "form-control", @type = "number", @style = "display:none" })
+
+        <br style="clear:both" />
+        <div class="modal-footer ">
+            <button class="btn btn-default" type="submit">Submit</button>
+        </div>
+    </div>
+        <div class="col-md-2"></div>
+    </div>
+}
+

@@ -1,0 +1,40 @@
+﻿@using RestourantManagement.DAL.Model
+@model List<Reservation>
+@{
+    ViewBag.Title = "ViewAndEditReservation";
+
+}
+
+<h2>Редактировать резерв</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Номер</th>
+            <th>Время резерва</th>
+            <th>Email</th>
+            <th>ФИО</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (Reservation item in Model)
+        {
+           
+
+            <tr>
+                <td>@item.ReservationId</td>
+                <td>@item.TimeOfReservation</td>
+                <td>@item.Email</td>
+                <td>@item.FullName</td>
+                
+
+                <td><input class="btn btn-primary" type="button" value="Принять" onclick="location.href='@Url.Action("AcceptOrRejectReservation", "RestourantMenu" ,new{ id = item.ReservationId, message = "Резерв подтвержден"},null)'" /></td>
+                <td><input class="btn btn-primary" type="button" value="Отклонить" onclick="location.href='@Url.Action("AcceptOrRejectReservation", "RestourantMenu" ,new{ id = item.ReservationId, message = "Резерв отменен"},null)'" /></td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+

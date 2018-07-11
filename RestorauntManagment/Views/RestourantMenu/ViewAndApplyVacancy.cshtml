@@ -1,0 +1,30 @@
+﻿@using RestourantManagement.DAL.Model
+@model List<Job>
+@{
+    ViewBag.Title = "ViewAndApplyVacancy";
+}
+
+
+<h2>ViewAndApplyVacancy</h2>
+<table class=" table table-hover">
+    <thead>
+        <tr>
+            <th>Номер</th>
+            <th>Наименование</th>
+            <th>Описание</th>
+        </tr>
+    </thead>
+    @foreach (Job item in Model)
+    {
+
+
+        <tbody>
+            <tr>
+                <td>@item.JobId</td>
+                <td>@item.jobType</td>
+                <td>@item.jobDesc</td>
+                <td><input class="btn btn-primary" type="button" value="Apply" onclick="location.href='@Url.Action("AddRecruitment", "RestourantMenu" ,new{ id = item.JobId},null)'" /></td>
+            </tr>
+        </tbody>
+    }
+</table>

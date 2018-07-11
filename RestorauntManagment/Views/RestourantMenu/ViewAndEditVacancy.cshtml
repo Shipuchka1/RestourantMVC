@@ -1,0 +1,42 @@
+﻿@using RestourantManagement.DAL.Model
+@model List<Job>
+@{
+    ViewBag.Title = "ViewAndEditVacancy";
+    int State = (int)ViewBag.State;
+    string Message = ViewBag.Message;
+}
+
+@if (State == 0)
+{
+    <div class="alert alert-success">@Message</div>
+}
+else if (State == 1)
+{
+    <div class="alert alert-danger">@Message</div>
+}
+
+<h2>ViewAndEditVacancy</h2>
+<table class=" table table-hover">
+    <thead>
+        <tr>
+            <th>Номер</th>
+            <th>Наименование</th>
+            <th>Описание</th>
+        </tr>
+    </thead>
+    @foreach (Job item in Model)
+    {
+
+
+        <tbody>
+            <tr>
+                <td>@item.JobId</td>
+                <td>@item.jobType</td>
+                <td>@item.jobDesc</td>
+                <td><input class="btn btn-primary" type="button" value="Delete" onclick="location.href='@Url.Action("DeleteVacancy", "RestourantMenu" ,new{ id = item.JobId},null)'" /></td>
+                <td><input class="btn btn-primary" type="button" value="Edit" onclick="location.href='@Url.Action("Addvacancy", "RestourantMenu" ,new{ id = item.JobId},null)'" /></td>
+            </tr>
+        </tbody>
+    }
+</table>
+<input class="btn btn-primary" type="button" value="Add" onclick="location.href='@Url.Action("AddVacancy", "RestourantMenu", new { id = 0 })'" />
